@@ -34,7 +34,7 @@ import 'package:sqflite_common/sqlite_api.dart' as _i16;
 class _FakeEither<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
 class _FakeMovieDetailResponse extends _i1.Fake
-    implements _i3.MovieDetailResponse {}
+    implements _i3.MovieDetailModel {}
 
 class _FakeResponse extends _i1.Fake implements _i4.Response {}
 
@@ -51,42 +51,47 @@ class MockMovieRepository extends _i1.Mock implements _i6.MovieRepository {
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>> getNowPlayingMovies() =>
       (super.noSuchMethod(Invocation.method(#getNowPlayingMovies, []),
-          returnValue: Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
-              _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7
-          .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
+              returnValue:
+                  Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
+                      _FakeEither<_i8.Failure, List<_i9.Movie>>()))
+          as _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>> getPopularMovies() =>
       (super.noSuchMethod(Invocation.method(#getPopularMovies, []),
-          returnValue: Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
-              _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7
-          .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
+              returnValue:
+                  Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
+                      _FakeEither<_i8.Failure, List<_i9.Movie>>()))
+          as _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>> getTopRatedMovies() =>
       (super.noSuchMethod(Invocation.method(#getTopRatedMovies, []),
           returnValue: Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
-              _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7
-          .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
+              _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7.Future<
+          _i2.Either<_i8.Failure, List<_i9.Movie>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, _i10.MovieDetail>> getMovieDetail(
           int? id) =>
       (super.noSuchMethod(Invocation.method(#getMovieDetail, [id]),
-          returnValue: Future<_i2.Either<_i8.Failure, _i10.MovieDetail>>.value(
-              _FakeEither<_i8.Failure, _i10.MovieDetail>())) as _i7
-          .Future<_i2.Either<_i8.Failure, _i10.MovieDetail>>);
+              returnValue:
+                  Future<_i2.Either<_i8.Failure, _i10.MovieDetail>>.value(
+                      _FakeEither<_i8.Failure, _i10.MovieDetail>()))
+          as _i7.Future<_i2.Either<_i8.Failure, _i10.MovieDetail>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>> getMovieRecommendations(
           int? id) =>
       (super.noSuchMethod(Invocation.method(#getMovieRecommendations, [id]),
-          returnValue: Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
-              _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7
-          .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
+              returnValue:
+                  Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
+                      _FakeEither<_i8.Failure, List<_i9.Movie>>()))
+          as _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>> searchMovies(
           String? query) =>
       (super.noSuchMethod(Invocation.method(#searchMovies, [query]),
-          returnValue: Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
-              _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7
-          .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
+              returnValue:
+                  Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
+                      _FakeEither<_i8.Failure, List<_i9.Movie>>()))
+          as _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, String>> saveWatchlist(
           _i10.MovieDetail? movie) =>
@@ -108,9 +113,10 @@ class MockMovieRepository extends _i1.Mock implements _i6.MovieRepository {
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>> getWatchlistMovies() =>
       (super.noSuchMethod(Invocation.method(#getWatchlistMovies, []),
-          returnValue: Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
-              _FakeEither<_i8.Failure, List<_i9.Movie>>())) as _i7
-          .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
+              returnValue:
+                  Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>.value(
+                      _FakeEither<_i8.Failure, List<_i9.Movie>>()))
+          as _i7.Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
 }
 
 /// A class which mocks [MovieRemoteDataSource].
@@ -139,11 +145,10 @@ class MockMovieRemoteDataSource extends _i1.Mock
           returnValue: Future<List<_i12.MovieModel>>.value(<_i12.MovieModel>[]))
       as _i7.Future<List<_i12.MovieModel>>);
   @override
-  _i7.Future<_i3.MovieDetailResponse> getMovieDetail(int? id) =>
+  _i7.Future<_i3.MovieDetailModel> getMovieDetail(int? id) =>
       (super.noSuchMethod(Invocation.method(#getMovieDetail, [id]),
-              returnValue: Future<_i3.MovieDetailResponse>.value(
-                  _FakeMovieDetailResponse()))
-          as _i7.Future<_i3.MovieDetailResponse>);
+          returnValue: Future<_i3.MovieDetailModel>.value(
+              _FakeMovieDetailResponse())) as _i7.Future<_i3.MovieDetailModel>);
   @override
   _i7.Future<List<_i12.MovieModel>> getMovieRecommendations(int? id) =>
       (super.noSuchMethod(Invocation.method(#getMovieRecommendations, [id]),

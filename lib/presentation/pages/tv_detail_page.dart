@@ -84,7 +84,9 @@ class DetailContent extends StatelessWidget {
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
-              final seasons = [1, 2, 3, 4, 5];
+              // final seasons = [1, 2, 3, 4, 5];
+              List<int> seasons =
+                  List.generate(tv.numberOfSeasons, (index) => index + 1);
               return Container(
                 decoration: BoxDecoration(
                   color: kRichBlack,
@@ -158,6 +160,7 @@ class DetailContent extends StatelessWidget {
                             ),
                             Text(
                                 '${tv.numberOfSeasons} seasons, ${tv.numberOfEpisodes} episodes'),
+                            Text(tv.id.toString()),
                             Row(
                               children: [
                                 RatingBarIndicator(
@@ -241,10 +244,7 @@ class DetailContent extends StatelessWidget {
                                 }
                               },
                             ),
-                            Text(
-                              'Seasons',
-                              style: kHeading6,
-                            ),
+                            SizedBox(height: 6),
                             DropdownMenu(
                               initialSelection: seasons[0],
                               // controller: colorController,
@@ -254,11 +254,11 @@ class DetailContent extends StatelessWidget {
                               // afterward. On desktop platforms however, this defaults to true.
                               requestFocusOnTap: true,
                               label: const Text('Season'),
-                              // onSelected: (season) {
-                              //   setState(() {
-                              //     selectedColor = color;
-                              //   });
-                              // },
+                              onSelected: (season) {
+                                Provider.of<TvDetailNotifier>(context,
+                                        listen: false)
+                                    .fetchTvSeason(tv.id, season);
+                              },
                               dropdownMenuEntries:
                                   seasons.map<DropdownMenuEntry>((season) {
                                 return DropdownMenuEntry(
@@ -266,6 +266,108 @@ class DetailContent extends StatelessWidget {
                                   label: season.toString(),
                                 );
                               }).toList(),
+                            ),
+                            SizedBox(height: 6),
+                            Consumer<TvDetailNotifier>(
+                              builder: (context, data, child) {
+                                if (data.tvSeasonState ==
+                                    RequestState.Loading) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (data.tvSeasonState ==
+                                    RequestState.Error) {
+                                  return Text(data.message);
+                                } else if (data.tvSeasonState ==
+                                    RequestState.Loaded) {
+                                  final episodes = data.tvSeason.episodes;
+                                  return Container(
+                                    height: 150,
+                                    child: ListView.builder(
+                                      itemCount: episodes.length,
+                                      itemBuilder: (context, index) {
+                                        final episode = episodes[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: InkWell(
+                                            onTap: () {
+                                              // Navigator.pushReplacementNamed(
+                                              //   context,
+                                              //   TvDetailPage.ROUTE_NAME,
+                                              //   arguments: tv.id,
+                                              // );
+                                            },
+                                            child: Card(
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    margin:
+                                                        const EdgeInsets.all(8),
+                                                    child: ClipRRect(
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            '$BASE_IMAGE_URL${episode.stillPath}',
+                                                        width: 100,
+                                                        placeholder:
+                                                            (context, url) =>
+                                                                Center(
+                                                          child:
+                                                              CircularProgressIndicator(),
+                                                        ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Icon(Icons.error),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  8)),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            '${episode.episodeNumber} - ${episode.name}',
+                                                            maxLines: 1,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          Text(
+                                                            episode.overview,
+                                                            maxLines: 3,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  return Container();
+                                }
+                              },
                             ),
                           ],
                         ),

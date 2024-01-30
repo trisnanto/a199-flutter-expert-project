@@ -190,7 +190,7 @@ void main() {
 
   group('Get Movie Detail', () {
     final tId = 1;
-    final tMovieResponse = MovieDetailResponse(
+    final tMovieResponse = MovieDetailModel(
       adult: false,
       backdropPath: 'backdropPath',
       budget: 100,

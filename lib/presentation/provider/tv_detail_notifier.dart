@@ -45,6 +45,9 @@ class TvDetailNotifier extends ChangeNotifier {
   RequestState _recommendationState = RequestState.Empty;
   RequestState get recommendationState => _recommendationState;
 
+  RequestState _tvSeasonState = RequestState.Empty;
+  RequestState get tvSeasonState => _tvSeasonState;
+
   String _message = '';
   String get message => _message;
 
@@ -83,18 +86,18 @@ class TvDetailNotifier extends ChangeNotifier {
   }
 
   Future<void> fetchTvSeason(int id, int season) async {
-    _tvState = RequestState.Loading;
+    _tvSeasonState = RequestState.Loading;
     notifyListeners();
     final seasonResult = await getTvSeason.execute(id, season);
     seasonResult.fold(
       (failure) {
-        _tvState = RequestState.Error;
+        _tvSeasonState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
       (tvSeason) {
         _tvSeason = tvSeason;
-        _tvState = RequestState.Loaded;
+        _tvSeasonState = RequestState.Loaded;
         notifyListeners();
       },
     );

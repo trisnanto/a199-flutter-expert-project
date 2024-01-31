@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-01-27 14:28:05</td>
+            <td class="headerValue">2024-01-31 21:25:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -72,7 +72,7 @@
 <a name="10"><span class="lineNum">      10 </span>            :   Future&lt;List&lt;MovieModel&gt;&gt; getNowPlayingMovies();</a>
 <a name="11"><span class="lineNum">      11 </span>            :   Future&lt;List&lt;MovieModel&gt;&gt; getPopularMovies();</a>
 <a name="12"><span class="lineNum">      12 </span>            :   Future&lt;List&lt;MovieModel&gt;&gt; getTopRatedMovies();</a>
-<a name="13"><span class="lineNum">      13 </span>            :   Future&lt;MovieDetailResponse&gt; getMovieDetail(int id);</a>
+<a name="13"><span class="lineNum">      13 </span>            :   Future&lt;MovieDetailModel&gt; getMovieDetail(int id);</a>
 <a name="14"><span class="lineNum">      14 </span>            :   Future&lt;List&lt;MovieModel&gt;&gt; getMovieRecommendations(int id);</a>
 <a name="15"><span class="lineNum">      15 </span>            :   Future&lt;List&lt;MovieModel&gt;&gt; searchMovies(String query);</a>
 <a name="16"><span class="lineNum">      16 </span>            : }</a>
@@ -98,12 +98,12 @@
 <a name="36"><span class="lineNum">      36 </span>            :   }</a>
 <a name="37"><span class="lineNum">      37 </span>            : </a>
 <a name="38"><span class="lineNum">      38 </span><span class="lineCov">          1 :   @override</span></a>
-<a name="39"><span class="lineNum">      39 </span>            :   Future&lt;MovieDetailResponse&gt; getMovieDetail(int id) async {</a>
+<a name="39"><span class="lineNum">      39 </span>            :   Future&lt;MovieDetailModel&gt; getMovieDetail(int id) async {</a>
 <a name="40"><span class="lineNum">      40 </span>            :     final response =</a>
 <a name="41"><span class="lineNum">      41 </span><span class="lineCov">          4 :         await client.get(Uri.parse('$BASE_URL/movie/$id?$API_KEY'));</span></a>
 <a name="42"><span class="lineNum">      42 </span>            : </a>
 <a name="43"><span class="lineNum">      43 </span><span class="lineCov">          2 :     if (response.statusCode == 200) {</span></a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">          3 :       return MovieDetailResponse.fromJson(json.decode(response.body));</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">          3 :       return MovieDetailModel.fromJson(json.decode(response.body));</span></a>
 <a name="45"><span class="lineNum">      45 </span>            :     } else {</a>
 <a name="46"><span class="lineNum">      46 </span><span class="lineCov">          1 :       throw ServerException();</span></a>
 <a name="47"><span class="lineNum">      47 </span>            :     }</a>

@@ -96,8 +96,8 @@ class TvDetailNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (tvSeason) {
-        _tvSeason = tvSeason;
         _tvSeasonState = RequestState.Loaded;
+        _tvSeason = tvSeason;
         notifyListeners();
       },
     );

@@ -4,23 +4,23 @@ import 'package:equatable/equatable.dart';
 class TvSeason extends Equatable {
   TvSeason({
     required this.id,
-    required this.airDate,
+    this.airDate,
     required this.episodes,
     required this.name,
     required this.overview,
     required this.tvSeasonModelId,
-    required this.posterPath,
+    this.posterPath,
     required this.seasonNumber,
     required this.voteAverage,
   });
 
   final String id;
-  final DateTime airDate;
+  final DateTime? airDate;
   final List<TvEpisode> episodes;
   final String name;
   final String overview;
   final int tvSeasonModelId;
-  final String posterPath;
+  final String? posterPath;
   final int seasonNumber;
   final double voteAverage;
 

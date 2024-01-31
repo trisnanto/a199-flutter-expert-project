@@ -1,0 +1,107 @@
+{
+  "adult": false,
+  "backdrop_path": "/path.jpg",
+  "created_by": [
+    {
+      "id": 11,
+      "credit_id": "Credit Id",
+      "name": "Name",
+      "gender": 1,
+      "profile_path": "Profile Path"
+    }
+  ],
+  "episode_run_time": [100],
+  "first_air_date": "2020-05-05",
+  "genres": [
+    {
+      "id": 1,
+      "name": "Action"
+    }
+  ],
+  "homepage": "https://google.com",
+  "id": 1,
+  "in_production": false,
+  "languages": ["en"],
+  "last_air_date": "2020-05-05",
+  "last_episode_to_air": {
+    "id": 1854320,
+    "name": "Last Episode",
+    "overview": "Overview",
+    "vote_average": 0.0,
+    "vote_count": 0,
+    "air_date": "2015-11-29",
+    "episode_number": 10,
+    "episode_type": "finale",
+    "production_code": "Production Code",
+    "runtime": 47,
+    "season_number": 1,
+    "show_id": 91234,
+    "still_path": "/path.jpg"
+  },
+  "name": "Name",
+  "next_episode_to_air": "2015-12-29",
+  "networks": [
+    {
+      "id": 26,
+      "logo_path": "/logo.png",
+      "name": "Channel 4",
+      "origin_country": "US"
+    }
+  ],
+  "number_of_episodes": 10,
+  "number_of_seasons": 1,
+  "origin_country": ["US"],
+  "original_language": "en",
+  "original_name": "Original Name",
+  "overview": "Overview",
+  "popularity": 1.0,
+  "poster_path": "/path.jpg",
+  "production_companies": [
+    {
+      "id": 1,
+      "logo_path": "/logo.png",
+      "name": "Company",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2015-11-03",
+      "episode_count": 10,
+      "id": 127913,
+      "name": "Season 1",
+      "overview": "Overview",
+      "poster_path": "/path.jpg",
+      "season_number": 1,
+      "vote_average": 0.0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Status",
+  "tagline": "Tagline",
+  "type": "Type",
+  "vote_average": 1.0,
+  "vote_count": 1
+}

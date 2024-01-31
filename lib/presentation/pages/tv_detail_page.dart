@@ -84,7 +84,6 @@ class DetailContent extends StatelessWidget {
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
-              // final seasons = [1, 2, 3, 4, 5];
               List<int> seasons =
                   List.generate(tv.numberOfSeasons, (index) => index + 1);
               return Container(
@@ -247,12 +246,6 @@ class DetailContent extends StatelessWidget {
                             SizedBox(height: 6),
                             DropdownMenu(
                               initialSelection: seasons[0],
-                              // controller: colorController,
-                              // requestFocusOnTap is enabled/disabled by platforms when it is null.
-                              // On mobile platforms, this is false by default. Setting this to true will
-                              // trigger focus request on the text field and virtual keyboard will appear
-                              // afterward. On desktop platforms however, this defaults to true.
-                              requestFocusOnTap: true,
                               label: const Text('Season'),
                               onSelected: (season) {
                                 Provider.of<TvDetailNotifier>(context,

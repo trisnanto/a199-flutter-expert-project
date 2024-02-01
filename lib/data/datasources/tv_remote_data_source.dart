@@ -54,7 +54,6 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
         await client.get(Uri.parse('$BASE_URL/tv/$id/season/$season?$API_KEY'));
 
     if (response.statusCode == 200) {
-      // print(json.decode(response.body));
       return TvSeasonModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException();

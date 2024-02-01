@@ -29,7 +29,7 @@ class SearchTvPage extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Text(
-            'Search Result',
+            'Search TV Series Result',
             style: kHeading6,
           ),
           Consumer<TvSearchNotifier>(

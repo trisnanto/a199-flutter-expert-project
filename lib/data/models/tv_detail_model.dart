@@ -15,7 +15,6 @@ class TvDetailModel extends Equatable {
     required this.languages,
     required this.lastAirDate,
     required this.name,
-    // required this.nextEpisodeToAir,
     required this.numberOfEpisodes,
     required this.numberOfSeasons,
     required this.originCountry,
@@ -42,7 +41,6 @@ class TvDetailModel extends Equatable {
   final List<String> languages;
   final String lastAirDate;
   final String name;
-  // final List<String> nextEpisodeToAir;
   final int numberOfEpisodes;
   final int numberOfSeasons;
   final List<String> originCountry;
@@ -70,8 +68,6 @@ class TvDetailModel extends Equatable {
         languages: List<String>.from(json["languages"].map((x) => x)),
         lastAirDate: json["last_air_date"],
         name: json["name"],
-        // nextEpisodeToAir:
-        //     List<String>.from(json["next_episode_to_air"].map((x) => x)),
         numberOfEpisodes: json["number_of_episodes"],
         numberOfSeasons: json["number_of_seasons"],
         originCountry: List<String>.from(json["origin_country"].map((x) => x)),
@@ -99,8 +95,6 @@ class TvDetailModel extends Equatable {
         "languages": List<dynamic>.from(languages.map((x) => x)),
         "last_air_date": lastAirDate,
         "name": name,
-        // "next_episode_to_air":
-        //     List<dynamic>.from(nextEpisodeToAir.map((x) => x)),
         "number_of_episodes": numberOfEpisodes,
         "number_of_seasons": numberOfSeasons,
         "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
@@ -146,7 +140,6 @@ class TvDetailModel extends Equatable {
         languages,
         lastAirDate,
         name,
-        // nextEpisodeToAir,
         numberOfEpisodes,
         numberOfSeasons,
         originCountry,

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +73,7 @@ class DetailContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+          imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => Center(
             child: CircularProgressIndicator(),
@@ -159,7 +159,6 @@ class DetailContent extends StatelessWidget {
                             ),
                             Text(
                                 '${tv.numberOfSeasons} seasons, ${tv.numberOfEpisodes} episodes'),
-                            Text(tv.id.toString()),
                             Row(
                               children: [
                                 RatingBarIndicator(
@@ -221,7 +220,7 @@ class DetailContent extends StatelessWidget {
                                               ),
                                               child: CachedNetworkImage(
                                                 imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+                                                    '$BASE_IMAGE_URL${tv.posterPath}',
                                                 placeholder: (context, url) =>
                                                     Center(
                                                   child:
@@ -244,21 +243,38 @@ class DetailContent extends StatelessWidget {
                               },
                             ),
                             SizedBox(height: 6),
-                            DropdownMenu(
-                              initialSelection: seasons[0],
-                              label: const Text('Season'),
-                              onSelected: (season) {
-                                Provider.of<TvDetailNotifier>(context,
-                                        listen: false)
-                                    .fetchTvSeason(tv.id, season);
-                              },
-                              dropdownMenuEntries:
-                                  seasons.map<DropdownMenuEntry>((season) {
-                                return DropdownMenuEntry(
-                                  value: season,
-                                  label: season.toString(),
-                                );
-                              }).toList(),
+                            Row(
+                              children: [
+                                Text(
+                                  'Season',
+                                  style: kHeading6,
+                                ),
+                                SizedBox(
+                                  width: 16,
+                                ),
+                                DropdownMenu(
+                                  initialSelection: seasons[0],
+                                  width: 80,
+                                  inputDecorationTheme:
+                                      const InputDecorationTheme(
+                                    filled: true,
+                                    contentPadding:
+                                        EdgeInsets.symmetric(vertical: 5.0),
+                                  ),
+                                  onSelected: (season) {
+                                    Provider.of<TvDetailNotifier>(context,
+                                            listen: false)
+                                        .fetchTvSeason(tv.id, season);
+                                  },
+                                  dropdownMenuEntries:
+                                      seasons.map<DropdownMenuEntry>((season) {
+                                    return DropdownMenuEntry(
+                                      value: season,
+                                      label: season.toString(),
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
                             ),
                             SizedBox(height: 6),
                             Consumer<TvDetailNotifier>(
@@ -282,75 +298,70 @@ class DetailContent extends StatelessWidget {
                                         final episode = episodes[index];
                                         return Padding(
                                           padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              // Navigator.pushReplacementNamed(
-                                              //   context,
-                                              //   TvDetailPage.ROUTE_NAME,
-                                              //   arguments: tv.id,
-                                              // );
-                                            },
-                                            child: Card(
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    margin:
-                                                        const EdgeInsets.all(8),
-                                                    child: ClipRRect(
-                                                      child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            '$BASE_IMAGE_URL${episode.stillPath}',
-                                                        width: 100,
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                Center(
-                                                          child:
-                                                              CircularProgressIndicator(),
+                                          child: Card(
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  margin:
+                                                      const EdgeInsets.all(8),
+                                                  child: ClipRRect(
+                                                    child: (episode.stillPath !=
+                                                            null)
+                                                        ? CachedNetworkImage(
+                                                            imageUrl:
+                                                                '$BASE_IMAGE_URL${episode.stillPath}',
+                                                            width: 100,
+                                                            placeholder:
+                                                                (context,
+                                                                        url) =>
+                                                                    Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            ),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                          )
+                                                        : null,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(8),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          '${episode.episodeNumber} - ${episode.name}',
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
                                                         ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Icon(Icons.error),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  8)),
+                                                        Text(
+                                                          episode.overview,
+                                                          maxLines: 3,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            '${episode.episodeNumber} - ${episode.name}',
-                                                            maxLines: 1,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                          Text(
-                                                            episode.overview,
-                                                            maxLines: 3,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         );
@@ -378,9 +389,7 @@ class DetailContent extends StatelessWidget {
                 ),
               );
             },
-            // initialChildSize: 0.5,
             minChildSize: 0.25,
-            // maxChildSize: 1.0,
           ),
         ),
         Padding(
@@ -411,16 +420,5 @@ class DetailContent extends StatelessWidget {
     }
 
     return result.substring(0, result.length - 2);
-  }
-
-  String _showDuration(int runtime) {
-    final int hours = runtime ~/ 60;
-    final int minutes = runtime % 60;
-
-    if (hours > 0) {
-      return '${hours}h ${minutes}m';
-    } else {
-      return '${minutes}m';
-    }
   }
 }
